@@ -1,0 +1,344 @@
+#:import hex kivy.utils.get_color_from_hex
+<SmoothButton@ButtonBehavior+Label>:
+    font_size: 14
+
+<OperatorWindow>:
+    id: main_win
+    orientation: "vertical"
+    canvas.before:
+        Color:
+            rgba: hex('#F7F7F7')
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        id: header
+        size_hint_y: None
+        height: 40
+        canvas.before:
+            Color:
+                rgba: hex('#1E90FF')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: "BritanniaPOS"
+            size_hint_x: .9
+            font_name: 'LHANDW.TTF'
+            bold: True
+            color: (1,1,1,1)
+        
+        SmoothButton:
+                   
+            id: loggedin_user
+            text: "kojo"
+            color: (1,1,1,1)
+            font_name: '0WAG.TTF'
+            size_hint_x: .1
+            underline: True
+            on_release: root.logout()
+    
+    BoxLayout:
+        id: current
+        size_hint_y: None
+        height: 50
+        canvas.before:
+            Color:
+                rgba:(1,1,1,1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Button:
+            text: "Current Item:"
+            background_normal: ""
+            font_name: '0WAG.TTF'
+            background_color: C('#1E90FF')
+            size_hint_x: .4
+        Button:
+            id: cur_product
+            text: "Default Product"
+            background_normal: ""
+            font_name: '0WAG.TTF'
+            background_color: C('#00B2EE')
+        Button:
+            id: cur_price
+            text: "0.00"
+            font_name: '0WAG.TTF'
+            background_normal: ""
+            background_color: C('#009ACD')
+            size_hint_x: .2
+
+    BoxLayout:
+        
+        BoxLayout:
+            id: product_details
+            orientation: "vertical"
+            size_hint_x: .8
+            spacing: 5
+            
+            BoxLayout:
+                id: product_labels
+                size_hint_y: None
+                height: 40
+                
+                canvas.before:
+                    Color:
+                        rgba: hex('#009ACD')
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                SmoothButton: 
+                    text: "Qty"
+                    size_hint_x: .1
+                    font_name: '0WAG.TTF'
+                SmoothButton: 
+                    text: "Product Code"
+                    size_hint_x: .3
+                    font_name: '0WAG.TTF'
+                SmoothButton: 
+                    text: "Product Name"
+                    size_hint_x: .3
+                    font_name: '0WAG.TTF'
+                SmoothButton: 
+                    text: "Disc"
+                    size_hint_x: .1
+                    font_name: '0WAG.TTF'
+                SmoothButton: 
+                    text: "Disc %"
+                    size_hint_x: .1
+                    font_name: '0WAG.TTF'
+                SmoothButton: 
+                    text: "VAT"
+                    size_hint_x: .1
+                    font_name: '0WAG.TTF'
+                
+                
+
+            BoxLayout:
+                id: product_inputs
+                size_hint_y: None
+                height: 30
+                spacing: 5
+                TextInput:
+                    id: qty_inp
+                    size_hint_x: .1
+                    background_normal: ''
+                    border_radius: 2
+                    font_name: '0WAG.TTF'
+                    canvas.before:
+                        Color:
+                            rgba: hex('#CDC8B1')
+                        Line:
+                            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+                TextInput:
+                    id: code_inp
+                    size_hint_x: .3
+                    multiline: False
+                    on_text_validate: root.update_purchase()
+                    background_normal: ''
+                    font_name: '0WAG.TTF'
+                    border_radius: 2
+                    canvas.before:
+                        Color:
+                            rgba: hex('#CDC8B1')
+                        Line:
+                            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+                
+                TextInput:
+                    id: name_inp
+                    size_hint_x: .3
+                    multiline: False
+                    on_text_validate: root.update_purchase()
+                    background_normal: ''
+                    font_name: '0WAG.TTF'
+                    border_radius: 2
+                    canvas.before:
+                        Color:
+                            rgba: hex('#CDC8B1')
+                        Line:
+                            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+                TextInput:
+                    id: disc_inp
+                    size_hint_x: .1
+                    background_normal: ''
+                    font_name: '0WAG.TTF'
+                    border_radius: 2
+                    canvas.before:
+                        Color:
+                            rgba: hex('#CDC8B1')
+                        Line:
+                            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+                TextInput:
+                    id: disc_perc_inp
+                    size_hint_x: .1
+                    background_normal: ''
+                    font_name: '0WAG.TTF'
+                    border_radius: 2
+                    canvas.before:
+                        Color:
+                            rgba: hex('#CDC8B1')
+                        Line:
+                            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+                TextInput:
+                    id: vat_inp
+                    size_hint_x: .1
+                    background_normal: ''
+                    font_name: '0WAG.TTF'
+                    border_radius: 2
+                    canvas.before:
+                        Color:
+                            rgba: hex('#CDC8B1')
+                        Line:
+                            rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+               
+
+            BoxLayout:
+                id: add_to_cart
+                orientation: "vertical"
+                BoxLayout:
+                    size_hint_y: None
+                    height: 30
+                    font_name: '0WAG.TTF'
+                    canvas.before:
+                        Color:
+                            rgba: hex('#009ACD')
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        text: "Code"
+                        size_hint_x: .2
+                        font_name: '0WAG.TTF'
+                    Label:
+                        text: "Product Name"
+                        size_hint_x: .3
+                        font_name: '0WAG.TTF'
+                    Label:
+                        text: "Qty"
+                        size_hint_x: .1
+                        font_name: '0WAG.TTF'
+                    Label:
+                        text: "Disc"
+                        size_hint_x: .1
+                        font_name: '0WAG.TTF'
+                    Label:
+                        text: "Price"
+                        size_hint_x: .1
+                        font_name: '0WAG.TTF'
+                    Label:
+                        text: "Product total"
+                        size_hint_x: .1
+                        font_name: '0WAG.TTF'
+                    Label:
+                        text: "Delete"
+                        size_hint_x: .1
+                        font_name: '0WAG.TTF'
+                GridLayout:
+                    id: products
+                    cols: 1
+                BoxLayout:
+                    size_hint_y: None
+                    height: 30
+                    Label:
+                        text: "Amount: "
+                        size_hint_x: .1
+                        font_name: '0WAG.TTF'
+                        font_size: 18
+                        color: C('#708090')
+                        
+                    TextInput:
+                        id: change_inp
+                        size_hint_x: .2
+                        text: "0"
+                        multiline: False
+                        background_normal: ''
+                        font_name: '0WAG.TTF'
+                        border_radius: 2
+                        on_text_validate: root.change_bal()
+                        canvas.before:
+                            Color:
+                                rgba: hex('#8B8378')
+                            Line:
+                                rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],self.border_radius)
+
+                    #Button:
+                        #id: change
+                        #text: 'Calculate Change'
+                        #size_hint_x: .2
+                        #background_normal: ''
+                        #background_color: C('#d65076')
+                        #on_release: root.change_bal()
+
+                    Button:
+                        id: bill
+                        text: 'Generate Bill'
+                        size_hint_x: .2
+                        background_normal: ''
+                        font_name: '0WAG.TTF'
+                        background_color: C('#00688B')
+                        on_release: root.generate_bill()
+
+                    
+                    Button:
+                        id: clear
+                        text: 'Clear All'
+                        size_hint_x: .1
+                        background_normal: ''
+                        font_name: '0WAG.TTF'
+                        background_color: C('#00688B')
+                        on_release: root.clear()
+
+                    
+
+        BoxLayout:
+            id: preview
+            orientation: "vertical"
+            size_hint_x: .2
+            
+
+            TextInput:
+                id: receipt_p
+                readonly: True
+                text: "Products\t\tQty\tAmount\n"
+                font_name: '0WAG.TTF'
+                size_hint_y: .1
+                bold: True
+                background_normal: ''
+                #color: C('#ffffff')
+                background_color: C('#F5F5F5')
+            
+            TextInput:
+                id: receipt_preview
+                readonly: True
+                text: " "
+                size_hint_y: .8
+                font_name: '0WAG.TTF'
+                bold: True
+                background_normal: ''
+                background_color: C('#F5F5F5')
+
+            TextInput:
+                id: change_preview
+                readonly: True
+                size_hint_y: .1
+                font_name: '0WAG.TTF'
+                bold: True
+                font_size: 24
+                background_normal: ''
+                background_color: C('#F5F5F5')
+
+    BoxLayout:
+        id: footer
+        size_hint_y: None
+        height: 30
+        canvas.before:
+            Color:
+                rgba: hex('#F5F5F5')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: 'Version 1.0.0 '
+            font_name: '0WAG.TTF'
+            color: C('#708090')
+        

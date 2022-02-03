@@ -1,0 +1,112 @@
+#:import C kivy.utils.get_color_from_hex
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+
+<SigninWindow>:
+    id: main_win
+    orientation: "vertical"
+    spacing: 10
+    space_x: self.size[0]/3
+    canvas.before:
+        Color:
+            rgba: hex('#F7F7F7')
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+
+        Label: 
+            text: ""
+            bold: True
+            size_hint_x: .9
+
+        FlatButton:
+            text: "x"
+            font_size: 24
+            color: C('#87CEFA')
+            size_hint_x: .1
+            on_release: Window.close()
+
+    BoxLayout:
+        size_hint_y: None
+        height: 55
+        text: 'HotPepper'
+        Label:
+            text: 'BritanniaPOS'
+            font_size: 48
+            font_name: 'LHANDW.TTF'
+            color: C('#1E90FF')
+            bold: True
+     
+     
+    BoxLayout:
+        orientation: "vertical"
+        padding: main_win.space_x, 10
+        #spacing: 20
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            size_hint_y: None
+            height: 160
+            Label:
+                text: 'Log in'
+                font_size: 20
+                color: C('#708090')
+                markup: True
+                font_name: '0WAG.TTF'
+                size_hint_y: None
+                height: 30
+            Label:
+                id: info
+                text: ''
+                markup: True
+                size_hint_y: None
+                height: 20
+            TextInput:
+                id: username_field
+                hint_text: "Username"
+                multiline: False
+                background_normal: ''
+                font_name: '0WAG.TTF'
+                focus: True
+                border: [2]
+                on_text_validate: pwd_field.focus = True
+            TextInput:
+                id: pwd_field
+                hint_text: "Password"
+                multiline: False
+                background_normal:''
+                font_name: '0WAG.TTF'
+                password: True
+                border: [2]
+                on_text_validate: root.validate_user()
+
+        Label:
+            id: sp
+            size_hint_y: None
+            height: 40
+        Button:
+            background_color: C('#1E90FF')
+            text: "Sign In"
+            font_name: '0WAG.TTF'
+            size_hint_y: None
+            bold: True
+            height: 40
+            background_normal: ""
+            on_release: root.validate_user()
+        Label:
+            id: sp2
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: 48
+        Label:
+            text: 'Powered by Ortmate'
+            font_size: 26
+            font_name: '0WAG.TTF'
+            color: C('#B8B8B8')
+            bold: True
